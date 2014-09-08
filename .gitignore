@@ -1,0 +1,7 @@
+# tmp files
+*~
+.DS_STORE
+
+# excluded folders
+bin/**/*
+gen/**/*
