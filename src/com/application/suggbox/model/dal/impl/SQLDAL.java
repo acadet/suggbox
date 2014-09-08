@@ -20,22 +20,22 @@ public class SQLDAL extends SQLiteOpenHelper implements IDAL {
 		StringBuffer request;
 		
 		// User table
-		request = new StringBuffer("CREATE TABLE user IF NOT EXISTS (");
+		request = new StringBuffer("CREATE TABLE IF NOT EXISTS user (");
 		request
 			.append("id TEXT PRIMARY KEY, ")
 			.append("firstName TEXT, ")
-			.append("picture TEXT);");
+			.append("picture INTEGER);");
 		database.execSQL(request.toString());
 		
 		// Interest table
-		request = new StringBuffer("CREATE TABLE interest IF NOT EXISTS (");
+		request = new StringBuffer("CREATE TABLE IF NOT EXISTS interest (");
 		request
 			.append("id TEXT PRIMARY KEY, ")
 			.append("label TEXT);");
 		database.execSQL(request.toString());
 		
 		// User/interest relationship
-		request = new StringBuffer("CREATE TABLE user_interest IF NOT EXISTS (");
+		request = new StringBuffer("CREATE TABLE IF NOT EXISTS user_interest (");
 		request
 			.append("user_id TEXT, ")
 			.append("interest_id TEXT, ")
@@ -45,7 +45,7 @@ public class SQLDAL extends SQLiteOpenHelper implements IDAL {
 		database.execSQL(request.toString());
 		
 		// Suggestion table
-		request = new StringBuffer("CREATE TABLE suggestion IF NOT EXISTS (");
+		request = new StringBuffer("CREATE TABLE IF NOT EXISTS suggestion (");
 		request
 			.append("id TEXT PRIMARY KEY, ")
 			.append("enquirer_id TEXT, ")
@@ -54,7 +54,7 @@ public class SQLDAL extends SQLiteOpenHelper implements IDAL {
 		database.execSQL(request.toString());
 		
 		// Suggestion/interest table
-		request = new StringBuffer("CREATE TABLE suggestion_interest IF NOT EXISTS (");
+		request = new StringBuffer("CREATE TABLE IF NOT EXISTS suggestion_interest (");
 		request
 			.append("suggestion_id TEXT, ")
 			.append("interest_id TEXT, ")
@@ -65,13 +65,13 @@ public class SQLDAL extends SQLiteOpenHelper implements IDAL {
 		
 		// Fill user table
 		database.execSQL(
-				"INSERT OR IGNORE INTO user (id, firstName, picture) VALUES ('1', 'Clement', 'clement.png');"
+				"INSERT OR IGNORE INTO user (id, firstName, picture) VALUES ('1', 'Clement', 2);"
 		);
 		database.execSQL(
-				"INSERT OR IGNORE INTO user (id, firstName, picture) VALUES ('2', 'Pierre', 'pierre.png');"
+				"INSERT OR IGNORE INTO user (id, firstName, picture) VALUES ('2', 'Pierre', 3);"
 		);
 		database.execSQL(
-				"INSERT OR IGNORE INTO user (id, firstName, picture) VALUES ('3', 'Ben', 'ben.png');"
+				"INSERT OR IGNORE INTO user (id, firstName, picture) VALUES ('3', 'Ben', 1);"
 		);
 		
 		// Fill interest table

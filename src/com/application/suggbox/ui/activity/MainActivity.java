@@ -3,38 +3,30 @@ package com.application.suggbox.ui.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.Window;
 import android.widget.ListView;
 
 import com.application.suggbox.R;
 import com.application.suggbox.model.bll.BusinessFactory;
 import com.application.suggbox.model.bll.IUserBusiness;
-import com.application.suggbox.ui.adaptator.UserAdaptator;
+import com.application.suggbox.ui.adapter.UserAdapter;
 
 public class MainActivity extends Activity {
 	private IUserBusiness _userBusiness;
-	
-	public MainActivity() {
-		this._userBusiness = new BusinessFactory().user();
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		ListView userList;
-		UserAdaptator adaptator;
+		UserAdapter adapter;
 		
+		this._userBusiness = new BusinessFactory().user(super.getApplicationContext());		
+		
+		super.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.activity_main);
 		
-		adaptator = new UserAdaptator(this, this._userBusiness.sortByName());
-		userList = (ListView) super.findViewById(R.layout.user_insight);
-		userList.setAdapter(adaptator);
+		adapter = new UserAdapter(this, this._userBusiness.sortByName());
+		userList = (ListView) super.findViewById(R.id.activity_main_users);
+		userList.setAdapter(adapter);
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		super.getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
 }

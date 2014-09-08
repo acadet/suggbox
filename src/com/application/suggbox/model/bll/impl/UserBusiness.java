@@ -20,7 +20,6 @@ public class UserBusiness implements IUserBusiness {
 
 	@Override
 	public User find(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return this._userDAO.find(id);
 	}
 }

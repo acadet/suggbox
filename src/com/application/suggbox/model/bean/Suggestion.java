@@ -2,9 +2,8 @@ package com.application.suggbox.model.bean;
 
 import android.database.Cursor;
 
-public class Interest {
+public class Suggestion {
 	private String _id;
-	
 	private String _label;
 	
 	public String getId() {
@@ -23,13 +22,13 @@ public class Interest {
 		this._label = value;
 	}
 	
-	public static Interest fromCursor(Cursor cursor) {
-		Interest i;
+	public static Suggestion fromCursor(Cursor cursor) {
+		Suggestion s;
 		
-		i = new Interest();
-		i.setId(cursor.getString(0));
-		i.setLabel(cursor.getString(1));
+		s = new Suggestion();
+		s.setId(cursor.getString(0));
+		s.setLabel(cursor.getString(2));
 		
-		return i;
+		return s;
 	}
 }

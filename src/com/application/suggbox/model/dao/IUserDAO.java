@@ -6,4 +6,6 @@ import com.application.suggbox.model.bean.User;
 
 public interface IUserDAO {
 	public List<User> sortByName();
+	
+	public User find(String id);
 }
