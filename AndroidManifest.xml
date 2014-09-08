@@ -26,6 +26,10 @@
             android:name="com.application.suggbox.ui.activity.UserActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name="com.application.suggbox.ui.activity.SuggestionFormActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>
