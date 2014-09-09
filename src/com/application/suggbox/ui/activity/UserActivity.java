@@ -1,14 +1,14 @@
 package com.application.suggbox.ui.activity;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.application.suggbox.R;
@@ -55,7 +55,6 @@ public class UserActivity extends Activity {
 		TextView userName;
 		InterestAdapter interestAdapter;
 		SimpleSuggestionAdapter suggestionAdapter;
-		ListView interestList, suggestionList;
 		
 		// Current user was stored in intent
 		intent = super.getIntent();
@@ -64,7 +63,7 @@ public class UserActivity extends Activity {
 		// Set picture and name
 		userPic = (ImageView) super.findViewById(R.id.activity_user_picture);
 		userName = (TextView) super.findViewById(R.id.activity_user_name);
-		UserPictureGetter.get(this._currentUser, userPic);
+		UserPictureGetter.getLarge(this._currentUser, userPic);
 		userName.setText(this._currentUser.getFirstName());
 		
 		// List suggestion
@@ -72,8 +71,7 @@ public class UserActivity extends Activity {
 				super.getApplicationContext(),
 				this._interestBusiness.sortByLabelForUser(this._currentUser)
 		);
-		interestList = (ListView) super.findViewById(R.id.activity_user_interests);
-		interestList.setAdapter(interestAdapter);
+		interestAdapter.adapt((ViewGroup) super.findViewById(R.id.activity_user_interests));
 		
 		// List existing suggestions
 		suggestionAdapter = new SimpleSuggestionAdapter(
@@ -81,18 +79,19 @@ public class UserActivity extends Activity {
 				this._suggestionBusiness.sortByLabelForUser(this._currentUser),
 				this._suggestionBusiness
 		);
-		suggestionList = (ListView) super.findViewById(R.id.activity_user_suggestions);
-		suggestionList.setEmptyView(super.findViewById(R.id.activity_user_no_suggestions));
-		suggestionList.setAdapter(suggestionAdapter);
+		suggestionAdapter.adapt(
+				(ViewGroup) super.findViewById(R.id.activity_user_suggestions),
+				super.findViewById(R.id.activity_user_no_suggestions)
+		);
 	}
 	
 	/**
 	 * Sets up new suggestion button
 	 */
 	private void _setButton() {
-		Button button;
+		TextView button;
 		
-		button = (Button) super.findViewById(R.id.activity_user_add_suggestion);
+		button = (TextView) super.findViewById(R.id.activity_user_add_suggestion);
 		button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

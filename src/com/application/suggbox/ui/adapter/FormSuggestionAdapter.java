@@ -26,7 +26,7 @@ public class FormSuggestionAdapter extends BaseAdapter {
 	private List<Interest> _interests;
 	
 	/**
-	 * Current checked items. 
+	 * Stores if items are checked or no
 	 * Mapped on list above
 	 */
 	private boolean[] _itemStates;

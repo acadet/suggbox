@@ -7,9 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.application.suggbox.R;
@@ -18,9 +16,9 @@ import com.application.suggbox.model.bll.ISuggestionBusiness;
 
 /**
  * @class SimpleSuggestionAdapter
- * @brief Adapts suggestions in user insight
+ * @brief Custom adapter. Adapts suggestions in user insight
  */
-public class SimpleSuggestionAdapter extends BaseAdapter {
+public class SimpleSuggestionAdapter {
 	/**
 	 * Current suggestion business
 	 */
@@ -51,58 +49,48 @@ public class SimpleSuggestionAdapter extends BaseAdapter {
 		this._inflater = LayoutInflater.from(this._context);
 		this._suggestionBusiness = suggestionBusiness;
 	}
-
-	@Override
-	public int getCount() {
-		return this._suggestions.size();
-	}
-
-	@Override
-	public Object getItem(int arg0) {
-		return this._suggestions.get(arg0);
-	}
-
-	@Override
-	public long getItemId(int arg0) {
-		return arg0;
-	}
-
-	@Override
-	public View getView(int position, View itemView, ViewGroup parentView) {
-		LinearLayout insight;
-		Suggestion s;
-		TextView label;
-		ImageView img;
+	
+	/**
+	 * Fills wrapper using specified pattern.
+	 * @param wrapper
+	 * @param defaultContent Default content to use if no entries
+	 */
+	public void adapt(ViewGroup wrapper, View defaultContent) {
 		
-		if (itemView == null) {
-			insight = (LinearLayout) this._inflater.inflate(R.layout.adapter_simple_suggestion, parentView, false);
-		} else {
-			insight = (LinearLayout) itemView;
+		if (this._suggestions.size() < 1) {
+			// No entries
+			defaultContent.setVisibility(View.VISIBLE);
+			defaultContent.invalidate();
+			return;
 		}
 		
-		s = this._suggestions.get(position);
-		label = (TextView) insight.findViewById(R.id.adapter_simple_suggestion_label);
-		label.setText(s.getLabel());
-		
-		// Icon triggers removing of selected suggestion
-		img = (ImageView) insight.findViewById(R.id.adapter_simple_suggestion_img);
-		img.setTag(s);
-		img.setOnClickListener(new OnClickListener() {
+		for (Suggestion s : this._suggestions) {
+			ViewGroup pattern;
+			TextView label;
+			ImageView trigger;
 			
-			@Override
-			public void onClick(View v) {
-				ImageView img;
-				Suggestion target;
+			pattern = (ViewGroup) this._inflater.inflate(R.layout.adapter_simple_suggestion, null);
+			
+			label = (TextView) pattern.findViewById(R.id.adapter_simple_suggestion_label);
+			label.setText(s.getLabel());
+			
+			trigger = (ImageView) pattern.findViewById(R.id.adapter_simple_suggestion_img);
+			trigger.setTag(s);
+			// Img triggers deletion
+			trigger.setOnClickListener(new OnClickListener() {
 				
-				// Targeted suggestion was stored in tag
-				img = (ImageView) v;
-				target = (Suggestion) img.getTag();
-				_suggestionBusiness.delete(target);
-				_suggestions.remove(target);
-				notifyDataSetChanged();
-			}
-		});
-		
-		return insight;
+				@Override
+				public void onClick(View v) {
+					ViewGroup parent;
+					
+					_suggestionBusiness.delete((Suggestion) v.getTag());
+					// Remove from display
+					parent = (ViewGroup) v.getParent();
+					((ViewGroup) parent.getParent()).removeView(parent);
+				}
+			});
+			
+			wrapper.addView(pattern);
+		}
 	}
 }

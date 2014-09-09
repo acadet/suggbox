@@ -9,10 +9,7 @@
         android:id="@+id/adapter_user_picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="15dp"
+        style="@style/main_user_pic"
         />
     
    	<TextView
@@ -20,8 +17,7 @@
    	    android:layout_width="wrap_content"
    	    android:layout_height="wrap_content"
    	    android:layout_gravity="left|center_vertical"
-   	    android:textSize="20sp"
-   	    android:textColor="#262626"
+   	    style="@style/main_user_name"
    	    />
 
 </LinearLayout>

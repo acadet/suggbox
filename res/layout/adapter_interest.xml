@@ -6,13 +6,9 @@
     
 	<TextView 
 	    android:id="@+id/adapter_interest_label"
-	    android:layout_width="match_parent"
+	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_marginTop="5dp"
-	    android:layout_marginRight="10dp"
-	    android:layout_marginBottom="5dp"
-	    android:layout_marginLeft="25dp"
-	    android:textColor="#1352e2"
+	    style="@style/user_interest"
 	    />
     
 </LinearLayout>

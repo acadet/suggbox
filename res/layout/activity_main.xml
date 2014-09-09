@@ -3,14 +3,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
+    android:orientation="vertical"
     tools:context=".MainActivity" >
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        style="@style/main_logo_wrapper"
+        >
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/logo"
+            style="@style/main_logo_item"
+            />
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="SuggBox"
+            style="@style/main_logo_title"
+            />
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Whisper your ideas"
+            style="@style/main_logo_subtitle"
+            />
+        
+    </LinearLayout>
 
     <ListView
         android:id="@+id/activity_main_users"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="#AAA"
-        android:dividerHeight="1px"
+        android:layout_height="wrap_content"
+        style="@style/main_user_list"
         />
 
 </LinearLayout>
