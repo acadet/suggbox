@@ -4,7 +4,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
-import android.sax.StartElementListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,11 +18,24 @@ import com.application.suggbox.model.bean.User;
 import com.application.suggbox.ui.activity.UserActivity;
 import com.application.suggbox.ui.util.UserPictureGetter;
 
+/**
+ * @class UserAdapter
+ * @brief Adapts users for main view
+ */
 public class UserAdapter extends BaseAdapter {
+	/**
+	 * Current users
+	 */
 	private List<User> _users;
 	
+	/**
+	 * Current context
+	 */
 	private Context _context;
 	
+	/**
+	 * Current inflater
+	 */
 	private LayoutInflater _inflater;
 	
 	public UserAdapter(Context context, List<User> users) {
@@ -52,7 +64,6 @@ public class UserAdapter extends BaseAdapter {
 		LinearLayout insight;
 		ImageView pic;
 		TextView name;
-		int imageId;
 		User u;
 		
 		if (itemView == null) {
@@ -61,15 +72,16 @@ public class UserAdapter extends BaseAdapter {
 			insight = (LinearLayout) itemView;
 		}
 		
-		pic = (ImageView) insight.findViewById(R.id.adaptator_user_picture);
-		name = (TextView) insight.findViewById(R.id.adaptator_user_name);
-		
 		u = this._users.get(position);
 		
+		// Set associated picture and name
+		pic = (ImageView) insight.findViewById(R.id.adapter_user_picture);
+		name = (TextView) insight.findViewById(R.id.adapter_user_name);		
 		UserPictureGetter.get(u, pic);
 		name.setText(u.getFirstName());
 		insight.setTag(u.getId());
 		
+		// On click, display insight for specified user
 		insight.setOnClickListener(new OnClickListener() {
 			
 			@Override

@@ -6,6 +6,10 @@ import com.application.suggbox.model.bean.User;
 import com.application.suggbox.model.bll.IUserBusiness;
 import com.application.suggbox.model.dao.IUserDAO;
 
+/**
+ * @class UserBusiness
+ * @brief An implementation of IUserBusiness
+ */
 public class UserBusiness implements IUserBusiness {
 	private IUserDAO _userDAO;
 	

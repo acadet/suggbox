@@ -3,26 +3,34 @@ package com.application.suggbox.ui.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.application.suggbox.R;
 import com.application.suggbox.model.bean.Interest;
-import com.application.suggbox.model.bean.User;
-import com.application.suggbox.ui.activity.UserActivity;
 
+/**
+ * @class InterestAdapter
+ * @brief Adapts interests in user insight
+ */
 public class InterestAdapter extends BaseAdapter {
+	/**
+	 * Current interests
+	 */
 	private List<Interest> _interests;
 	
+	/**
+	 * Current context
+	 */
 	private Context _context;
 	
+	/**
+	 * Current inflater
+	 */
 	private LayoutInflater _inflater;
 	
 	public InterestAdapter(Context context, List<Interest> interests) {
@@ -59,7 +67,7 @@ public class InterestAdapter extends BaseAdapter {
 		}
 		
 		i = this._interests.get(position);
-		label = (TextView) insight.findViewById(R.id.adaptator_interest_label);
+		label = (TextView) insight.findViewById(R.id.adapter_interest_label);
 		label.setText(i.getLabel());
 		
 		return insight;

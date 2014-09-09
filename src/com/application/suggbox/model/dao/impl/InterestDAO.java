@@ -10,7 +10,14 @@ import com.application.suggbox.model.bean.User;
 import com.application.suggbox.model.dal.IDAL;
 import com.application.suggbox.model.dao.IInterestDAO;
 
+/**
+ * @class InterestDAO
+ * @brief An implementation of IInterestDAO
+ */
 public class InterestDAO implements IInterestDAO {
+	/**
+	 * Current DAL
+	 */
 	private IDAL _dal;
 	
 	public InterestDAO(IDAL dal) {
@@ -18,7 +25,7 @@ public class InterestDAO implements IInterestDAO {
 	}
 	
 	@Override
-	public List<Interest> sortByNameForUser(User user) {
+	public List<Interest> sortByLabelForUser(User user) {
 		Cursor cursor;
 		List<Interest> outcome;
 		StringBuffer request;

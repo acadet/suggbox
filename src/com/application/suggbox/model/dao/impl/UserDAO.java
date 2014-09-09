@@ -9,7 +9,14 @@ import com.application.suggbox.model.bean.User;
 import com.application.suggbox.model.dal.IDAL;
 import com.application.suggbox.model.dao.IUserDAO;
 
+/**
+ * @class UserDAO
+ * @brief An implementation of IUserDAO
+ */
 public class UserDAO implements IUserDAO {
+	/**
+	 * Current DAL
+	 */
 	private IDAL _dal;
 	
 	public UserDAO(IDAL dal) {

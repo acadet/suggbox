@@ -8,8 +8,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.application.suggbox.model.dal.IDAL;
 
+/**
+ * @class SQLDAL
+ * @brief A SQL DAL
+ */
 public class SQLDAL extends SQLiteOpenHelper implements IDAL {
+	/**
+	 * Current DB version
+	 */
 	public static final int DATABASE_VERSION = 1;
+	
+	/**
+	 * Name of DB
+	 */
 	public static final String DATABASE_NAME = "SuggBox.db";
 	
 	public SQLDAL(Context context) {
@@ -93,6 +104,7 @@ public class SQLDAL extends SQLiteOpenHelper implements IDAL {
 		);
 		
 		// Fill user/interest relationship
+		// Ben
 		database.execSQL(
 				"INSERT OR IGNORE INTO user_interest (user_id, interest_id) VALUES ('1', '2');"
 		);
@@ -103,6 +115,7 @@ public class SQLDAL extends SQLiteOpenHelper implements IDAL {
 				"INSERT OR IGNORE INTO user_interest (user_id, interest_id) VALUES ('1', '4');"
 		);
 		
+		// Clement
 		database.execSQL(
 				"INSERT OR IGNORE INTO user_interest (user_id, interest_id) VALUES ('2', '1');"
 		);
@@ -110,6 +123,7 @@ public class SQLDAL extends SQLiteOpenHelper implements IDAL {
 				"INSERT OR IGNORE INTO user_interest (user_id, interest_id) VALUES ('2', '4');"
 		);
 		
+		// Pierre
 		database.execSQL(
 				"INSERT OR IGNORE INTO user_interest (user_id, interest_id) VALUES ('3', '2');"
 		);
@@ -125,10 +139,6 @@ public class SQLDAL extends SQLiteOpenHelper implements IDAL {
 	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
 		// TODO Auto-generated method stub
 	}
-	
-	/*public void insert(String table, ContentValues values) {
-		super.getWritableDatabase().insert(table, null, values);
-	}*/
 	
 	@Override
 	public void insert(String table, ContentValues values) {

@@ -8,6 +8,10 @@ import com.application.suggbox.model.bean.User;
 import com.application.suggbox.model.bll.ISuggestionBusiness;
 import com.application.suggbox.model.dao.ISuggestionDAO;
 
+/**
+ * @class SuggestionBusiness
+ * @brief An implementation of ISuggestionBusiness
+ */
 public class SuggestionBusiness implements ISuggestionBusiness {
 	private ISuggestionDAO _dao;
 	
@@ -16,8 +20,8 @@ public class SuggestionBusiness implements ISuggestionBusiness {
 	}
 
 	@Override
-	public List<Suggestion> getForUser(User user) {
-		return this._dao.getForUser(user);
+	public List<Suggestion> sortByLabelForUser(User user) {
+		return this._dao.sortByLabelForUser(user);
 	}
 	
 	@Override

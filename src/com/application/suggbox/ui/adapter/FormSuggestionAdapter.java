@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,12 +15,30 @@ import android.widget.LinearLayout;
 import com.application.suggbox.R;
 import com.application.suggbox.model.bean.Interest;
 
+/**
+ * @class FormSuggestionAdapter
+ * @brief Adapts interests in suggestion form
+ */
 public class FormSuggestionAdapter extends BaseAdapter {
+	/**
+	 * Current interests
+	 */
 	private List<Interest> _interests;
+	
+	/**
+	 * Current checked items. 
+	 * Mapped on list above
+	 */
 	private boolean[] _itemStates;
 	
+	/**
+	 * Current context
+	 */
 	private Context _context;
 	
+	/**
+	 * Current inflater
+	 */
 	private LayoutInflater _inflater;
 	
 	public FormSuggestionAdapter(Context context, List<Interest> interests) {
@@ -63,6 +80,7 @@ public class FormSuggestionAdapter extends BaseAdapter {
 		checkbox.setText(i.getLabel());
 		checkbox.setTag(position);
 		
+		// On click, update checked state
 		checkbox.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -71,6 +89,7 @@ public class FormSuggestionAdapter extends BaseAdapter {
 				int index;
 				
 				c = (CheckBox) v;
+				// Position was stored in tag
 				index = Integer.parseInt(c.getTag().toString());
 				
 				_itemStates[index] = c.isChecked();
@@ -80,13 +99,16 @@ public class FormSuggestionAdapter extends BaseAdapter {
 		return insight;
 	}
 	
+	/**
+	 * Returns all checked interests
+	 * @return
+	 */
 	public List<Interest> getCheckedInterests() {
 		List<Interest> outcome;
 		
 		outcome = new ArrayList<Interest>();
 		
 		for (int i = 0; i < this._itemStates.length; i++) {
-			Log.d("foo", Boolean.toString(this._itemStates[i]));
 			if (this._itemStates[i]) {
 				outcome.add(this._interests.get(i));
 			}

@@ -14,22 +14,42 @@ import android.widget.TextView;
 
 import com.application.suggbox.R;
 import com.application.suggbox.model.bean.Suggestion;
-import com.application.suggbox.model.bll.BusinessFactory;
 import com.application.suggbox.model.bll.ISuggestionBusiness;
 
+/**
+ * @class SimpleSuggestionAdapter
+ * @brief Adapts suggestions in user insight
+ */
 public class SimpleSuggestionAdapter extends BaseAdapter {
+	/**
+	 * Current suggestion business
+	 */
 	private ISuggestionBusiness _suggestionBusiness;
+	
+	/**
+	 * Current suggestions
+	 */
 	private List<Suggestion> _suggestions;
 	
+	/**
+	 * Current context
+	 */
 	private Context _context;
 	
+	/**
+	 * Current inflater
+	 */
 	private LayoutInflater _inflater;
 	
-	public SimpleSuggestionAdapter(Context context, List<Suggestion> suggestions) {
+	public SimpleSuggestionAdapter(
+			Context context,
+			List<Suggestion> suggestions,
+			ISuggestionBusiness suggestionBusiness) {
+		
 		this._context = context;
 		this._suggestions = suggestions;
 		this._inflater = LayoutInflater.from(this._context);
-		this._suggestionBusiness = new BusinessFactory().suggestion(this._context);
+		this._suggestionBusiness = suggestionBusiness;
 	}
 
 	@Override
@@ -64,6 +84,7 @@ public class SimpleSuggestionAdapter extends BaseAdapter {
 		label = (TextView) insight.findViewById(R.id.adapter_simple_suggestion_label);
 		label.setText(s.getLabel());
 		
+		// Icon triggers removing of selected suggestion
 		img = (ImageView) insight.findViewById(R.id.adapter_simple_suggestion_img);
 		img.setTag(s);
 		img.setOnClickListener(new OnClickListener() {
@@ -73,6 +94,7 @@ public class SimpleSuggestionAdapter extends BaseAdapter {
 				ImageView img;
 				Suggestion target;
 				
+				// Targeted suggestion was stored in tag
 				img = (ImageView) v;
 				target = (Suggestion) img.getTag();
 				_suggestionBusiness.delete(target);

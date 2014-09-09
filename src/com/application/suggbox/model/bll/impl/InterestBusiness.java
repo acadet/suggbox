@@ -7,6 +7,10 @@ import com.application.suggbox.model.bean.User;
 import com.application.suggbox.model.bll.IInterestBusiness;
 import com.application.suggbox.model.dao.IInterestDAO;
 
+/**
+ * @class InterestBusiness
+ * @brief An implementation of InterestBusiness
+ */
 public class InterestBusiness implements IInterestBusiness {
 	private IInterestDAO _dao;
 	
@@ -15,8 +19,7 @@ public class InterestBusiness implements IInterestBusiness {
 	}
 
 	@Override
-	public List<Interest> sortByNameForUser(User user) {
-		return this._dao.sortByNameForUser(user);
+	public List<Interest> sortByLabelForUser(User user) {
+		return this._dao.sortByLabelForUser(user);
 	}
-
 }

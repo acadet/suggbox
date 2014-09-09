@@ -21,13 +21,34 @@ import com.application.suggbox.ui.adapter.InterestAdapter;
 import com.application.suggbox.ui.adapter.SimpleSuggestionAdapter;
 import com.application.suggbox.ui.util.UserPictureGetter;
 
+/**
+ * @class UserActivity
+ * @brief User insight. Lists his/her interests and submitted suggestions
+ */
 public class UserActivity extends Activity {
+	/**
+	 * User business
+	 */
 	private IUserBusiness _userBusiness;
+	
+	/**
+	 * Interest business
+	 */
 	private IInterestBusiness _interestBusiness;
+	
+	/**
+	 * Suggestion business
+	 */
 	private ISuggestionBusiness _suggestionBusiness;
 	
+	/**
+	 * Current user
+	 */
 	private User _currentUser;
 	
+	/**
+	 * Fills layout
+	 */
 	private void _setUser() {
 		Intent intent;
 		ImageView userPic;
@@ -36,31 +57,38 @@ public class UserActivity extends Activity {
 		SimpleSuggestionAdapter suggestionAdapter;
 		ListView interestList, suggestionList;
 		
+		// Current user was stored in intent
 		intent = super.getIntent();
 		this._currentUser = this._userBusiness.find(intent.getExtras().getString("user-id"));
 		
+		// Set picture and name
 		userPic = (ImageView) super.findViewById(R.id.activity_user_picture);
 		userName = (TextView) super.findViewById(R.id.activity_user_name);
-		
 		UserPictureGetter.get(this._currentUser, userPic);
 		userName.setText(this._currentUser.getFirstName());
 		
+		// List suggestion
 		interestAdapter = new InterestAdapter(
 				super.getApplicationContext(),
-				this._interestBusiness.sortByNameForUser(this._currentUser)
+				this._interestBusiness.sortByLabelForUser(this._currentUser)
 		);
 		interestList = (ListView) super.findViewById(R.id.activity_user_interests);
 		interestList.setAdapter(interestAdapter);
 		
+		// List existing suggestions
 		suggestionAdapter = new SimpleSuggestionAdapter(
 				super.getApplicationContext(),
-				this._suggestionBusiness.getForUser(this._currentUser)
+				this._suggestionBusiness.sortByLabelForUser(this._currentUser),
+				this._suggestionBusiness
 		);
 		suggestionList = (ListView) super.findViewById(R.id.activity_user_suggestions);
 		suggestionList.setEmptyView(super.findViewById(R.id.activity_user_no_suggestions));
 		suggestionList.setAdapter(suggestionAdapter);
 	}
 	
+	/**
+	 * Sets up new suggestion button
+	 */
 	private void _setButton() {
 		Button button;
 		
@@ -70,6 +98,7 @@ public class UserActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent;
 				
+				// Move to suggestion form
 				intent = new Intent(getApplicationContext(), SuggestionFormActivity.class);
 				intent.putExtra("user-id", _currentUser.getId());
 				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -86,11 +115,13 @@ public class UserActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.activity_user);
 		
+		// Collect business classes
 		factory = new BusinessFactory();
 		this._userBusiness = factory.user(super.getApplicationContext());
 		this._interestBusiness = factory.interest(super.getApplicationContext());
 		this._suggestionBusiness = factory.suggestion(super.getApplicationContext());
 		
+		// Set layout
 		this._setUser();
 		this._setButton();
 	}

@@ -2,7 +2,6 @@ package com.application.suggbox.ui.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.Window;
 import android.widget.ListView;
 
@@ -11,6 +10,10 @@ import com.application.suggbox.model.bll.BusinessFactory;
 import com.application.suggbox.model.bll.IUserBusiness;
 import com.application.suggbox.ui.adapter.UserAdapter;
 
+/**
+ * @class MainActivity
+ * @brief Main activity. In this view, all users are sorted
+ */
 public class MainActivity extends Activity {
 	private IUserBusiness _userBusiness;
 
@@ -25,6 +28,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.activity_main);
 		
+		// Set users
 		adapter = new UserAdapter(this, this._userBusiness.sortByName());
 		userList = (ListView) super.findViewById(R.id.activity_main_users);
 		userList.setAdapter(adapter);

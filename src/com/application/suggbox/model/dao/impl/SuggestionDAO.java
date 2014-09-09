@@ -13,7 +13,14 @@ import com.application.suggbox.model.bean.User;
 import com.application.suggbox.model.dal.IDAL;
 import com.application.suggbox.model.dao.ISuggestionDAO;
 
+/**
+ * @class SuggestionDAO
+ * @brief An implementation of ISuggestionDAO
+ */
 public class SuggestionDAO implements ISuggestionDAO {
+	/**
+	 * Current DAL
+	 */
 	private IDAL _dal;
 	
 	public SuggestionDAO(IDAL dal) {
@@ -21,12 +28,12 @@ public class SuggestionDAO implements ISuggestionDAO {
 	}	
 	
 	@Override
-	public List<Suggestion> getForUser(User user) {
+	public List<Suggestion> sortByLabelForUser(User user) {
 		Cursor cursor;
 		List<Suggestion> outcome;
 		
 		cursor = this._dal.query(
-				"SELECT * FROM suggestion WHERE enquirer_id = ?",
+				"SELECT * FROM suggestion WHERE enquirer_id = ? ORDER BY label",
 				new String[] { user.getId() }
 		);
 				
