@@ -6,6 +6,7 @@ import java.util.List;
 import android.database.Cursor;
 
 import com.application.suggbox.model.bean.Interest;
+import com.application.suggbox.model.bean.User;
 import com.application.suggbox.model.dal.IDAL;
 import com.application.suggbox.model.dao.IInterestDAO;
 
@@ -17,7 +18,7 @@ public class InterestDAO implements IInterestDAO {
 	}
 	
 	@Override
-	public List<Interest> sortByNameForUser(String userId) {
+	public List<Interest> sortByNameForUser(User user) {
 		Cursor cursor;
 		List<Interest> outcome;
 		StringBuffer request;
@@ -30,7 +31,7 @@ public class InterestDAO implements IInterestDAO {
 		cursor = 
 				this._dal.query(
 					request.toString(),
-					new String[] { userId }
+					new String[] { user.getId() }
 			);
 		
 		outcome = new ArrayList<Interest>();

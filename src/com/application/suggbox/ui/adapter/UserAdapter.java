@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.application.suggbox.R;
 import com.application.suggbox.model.bean.User;
 import com.application.suggbox.ui.activity.UserActivity;
+import com.application.suggbox.ui.util.UserPictureGetter;
 
 public class UserAdapter extends BaseAdapter {
 	private List<User> _users;
@@ -65,22 +66,7 @@ public class UserAdapter extends BaseAdapter {
 		
 		u = this._users.get(position);
 		
-		switch (u.getPicture()) {
-			case Ben:
-				imageId = R.drawable.ben;
-				break;
-			case Clement:
-				imageId = R.drawable.clement;
-				break;
-			case Pierre:
-				imageId = R.drawable.pierre;
-				break;
-			default:
-				imageId = R.drawable.default_user;
-				break;
-		}
-		
-		pic.setImageResource(imageId);		
+		UserPictureGetter.get(u, pic);
 		name.setText(u.getFirstName());
 		insight.setTag(u.getId());
 		

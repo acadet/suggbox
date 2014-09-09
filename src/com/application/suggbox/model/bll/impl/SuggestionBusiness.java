@@ -2,7 +2,9 @@ package com.application.suggbox.model.bll.impl;
 
 import java.util.List;
 
+import com.application.suggbox.model.bean.Interest;
 import com.application.suggbox.model.bean.Suggestion;
+import com.application.suggbox.model.bean.User;
 import com.application.suggbox.model.bll.ISuggestionBusiness;
 import com.application.suggbox.model.dao.ISuggestionDAO;
 
@@ -14,7 +16,21 @@ public class SuggestionBusiness implements ISuggestionBusiness {
 	}
 
 	@Override
-	public List<Suggestion> getForUser(String userId) {
-		return this._dao.getForUser(userId);
+	public List<Suggestion> getForUser(User user) {
+		return this._dao.getForUser(user);
+	}
+	
+	@Override
+	public void add(String label, User user, List<Interest> interests) {
+		Suggestion s;
+		
+		s = new Suggestion();
+		s.setLabel(label);
+		this._dao.add(s, user, interests);
+	}
+	
+	@Override
+	public void delete(Suggestion suggestion) {
+		this._dao.delete(suggestion);
 	}
 }

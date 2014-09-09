@@ -1,5 +1,6 @@
 package com.application.suggbox.model.dal.impl;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -129,6 +130,17 @@ public class SQLDAL extends SQLiteOpenHelper implements IDAL {
 		super.getWritableDatabase().insert(table, null, values);
 	}*/
 	
+	@Override
+	public void insert(String table, ContentValues values) {
+		super.getWritableDatabase().insert(table, null, values);
+	}
+	
+	@Override
+	public void delete(String table, String whereClause, String[] whereArgs) {
+		super.getWritableDatabase().delete(table, whereClause, whereArgs);
+	}
+	
+	@Override
 	public Cursor query(String request, String[] selectionArgs) {
 		return super.getReadableDatabase().rawQuery(request, selectionArgs);
 	}

@@ -19,6 +19,7 @@ import com.application.suggbox.model.bll.ISuggestionBusiness;
 import com.application.suggbox.model.bll.IUserBusiness;
 import com.application.suggbox.ui.adapter.InterestAdapter;
 import com.application.suggbox.ui.adapter.SimpleSuggestionAdapter;
+import com.application.suggbox.ui.util.UserPictureGetter;
 
 public class UserActivity extends Activity {
 	private IUserBusiness _userBusiness;
@@ -40,19 +41,20 @@ public class UserActivity extends Activity {
 		
 		userPic = (ImageView) super.findViewById(R.id.activity_user_picture);
 		userName = (TextView) super.findViewById(R.id.activity_user_name);
-		userPic.setImageResource(R.drawable.default_user);
+		
+		UserPictureGetter.get(this._currentUser, userPic);
 		userName.setText(this._currentUser.getFirstName());
 		
 		interestAdapter = new InterestAdapter(
 				super.getApplicationContext(),
-				this._interestBusiness.sortByNameForUser(this._currentUser.getId())
+				this._interestBusiness.sortByNameForUser(this._currentUser)
 		);
 		interestList = (ListView) super.findViewById(R.id.activity_user_interests);
 		interestList.setAdapter(interestAdapter);
 		
 		suggestionAdapter = new SimpleSuggestionAdapter(
 				super.getApplicationContext(),
-				this._suggestionBusiness.getForUser(this._currentUser.getId())
+				this._suggestionBusiness.getForUser(this._currentUser)
 		);
 		suggestionList = (ListView) super.findViewById(R.id.activity_user_suggestions);
 		suggestionList.setEmptyView(super.findViewById(R.id.activity_user_no_suggestions));
@@ -70,6 +72,7 @@ public class UserActivity extends Activity {
 				
 				intent = new Intent(getApplicationContext(), SuggestionFormActivity.class);
 				intent.putExtra("user-id", _currentUser.getId());
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				getApplicationContext().startActivity(intent);
 			}
 		});
