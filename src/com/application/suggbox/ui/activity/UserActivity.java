@@ -124,4 +124,11 @@ public class UserActivity extends Activity {
 		this._setUser();
 		this._setButton();
 	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		this._setUser();
+	}
 }

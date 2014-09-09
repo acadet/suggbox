@@ -6,12 +6,12 @@
    >
     
     <LinearLayout
-         android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_gravity="right"
-    style="@style/user_suggestion_item_wrapper"
-        >
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:layout_gravity="right"
+	    style="@style/user_suggestion_item_wrapper">
+	    
         <TextView
 		    android:id="@+id/adapter_simple_suggestion_label"
 		    android:layout_width="wrap_content"
@@ -27,7 +27,5 @@
 		    android:layout_gravity="right|center"
 		    android:layout_marginLeft="10px" />
     </LinearLayout>
-    
-	
 	
 </LinearLayout>

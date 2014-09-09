@@ -85,7 +85,6 @@ public class SuggestionFormActivity extends Activity {
 			public void onClick(View v) {
 				EditText input;
 				List<Interest> selectedInterests;
-				Intent intent;
 				
 				// Start of submit process
 				// Get selected interests
@@ -120,10 +119,7 @@ public class SuggestionFormActivity extends Activity {
 				_suggestionBusiness.add(input.getText().toString(), _currentUser, selectedInterests);
 				
 				// Move back to user insight
-				intent = new Intent(getApplicationContext(), UserActivity.class);
-				intent.putExtra("user-id", _currentUser.getId());
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);				
-				getApplicationContext().startActivity(intent);
+				finish();
 			}
 		});
 	}

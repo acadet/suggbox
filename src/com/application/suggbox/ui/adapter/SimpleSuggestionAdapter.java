@@ -56,6 +56,7 @@ public class SimpleSuggestionAdapter {
 	 * @param defaultContent Default content to use if no entries
 	 */
 	public void adapt(ViewGroup wrapper, View defaultContent) {
+		wrapper.removeAllViewsInLayout();
 		
 		if (this._suggestions.size() < 1) {
 			// No entries

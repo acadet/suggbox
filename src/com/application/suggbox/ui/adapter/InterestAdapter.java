@@ -41,6 +41,8 @@ public class InterestAdapter {
 	 * @param wrapper
 	 */
 	public void adapt(ViewGroup wrapper) {
+		wrapper.removeAllViewsInLayout();
+		
 		for (Interest i : this._interests) {
 			ViewGroup pattern;
 			TextView label;

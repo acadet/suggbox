@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:background="#1c1c1c" >
     
+    <!-- User's picture wrapper -->
     <RelativeLayout 
         android:layout_width="match_parent"
         android:layout_height="150px"
@@ -21,19 +22,21 @@
 	        android:id="@+id/activity_user_picture"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_centerInParent="true"
-	        />
+	        android:layout_centerInParent="true" />
         
     </RelativeLayout>
     
+    <!-- Scrollable layout -->
     <ScrollView 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff">
+        
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             
+            <!-- Wraps intro -->
 	       <LinearLayout
 	           android:id="@+id/activity_user_strap_wrapper"
 		        android:layout_width="wrap_content"
@@ -56,6 +59,7 @@
 		        
 		    </LinearLayout>
 		    
+	       	<!-- Contains interests. Filled by activity  -->
 		    <LinearLayout
 		        android:id="@+id/activity_user_interests"
 		        android:layout_width="match_parent"
@@ -64,10 +68,10 @@
 		        android:orientation="vertical"
 		        style="@style/user_interest_list" />
 		    
+		    <!-- Wraps stuff about suggestions -->
 		    <LinearLayout
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:layout_marginTop="5dp"
 		        android:orientation="vertical"
 		        android:layout_below="@id/activity_user_interests"
 		        style="@style/user_suggestion_wrapper">
@@ -79,6 +83,7 @@
 			        android:text="Your suggestions" 
 			        style="@style/user_suggestion_title" />
 			    
+		        <!-- Lists suggestions. Filled by activity -->
 			    <LinearLayout 
 			        android:id="@+id/activity_user_suggestions"
 			        android:layout_width="match_parent"
